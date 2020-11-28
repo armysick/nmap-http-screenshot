@@ -23,7 +23,7 @@ action = function(host, port)
 
 	-- Screenshots will be called screenshot-namp-<IP>:<port>.png
 
-        local filename = "screenshot-nmap-" .. service_prefix .. host.ip .. ":" .. port.number .. ".png"
+        local filename = host.ip .. ".." .. port.number .. ".png"
 
 	-- Execute the shell command timeout 10 wkhtmltoimage <url> <filename>
 	local cmd = "timeout 10 wkhtmltoimage --height 768 -n " .. service_prefix .. "://" .. host.ip .. ":" .. port.number .. " " .. filename .. " 2>/dev/null >/dev/null"
