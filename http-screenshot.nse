@@ -21,12 +21,18 @@ action = function(host, port)
 	-- Check to see if ssl is enabled, if it is, this will be set to "ssl"
 	local service_prefix = port.service
 
-	-- Screenshots will be called screenshot-namp-<IP>:<port>.png
+	if host.targetname == nil then
+          identifier = identifier .. host.ip
+        else
+          identifier = identifier .. host.targetname
+        end
 
-        local filename = "./ui_app/static/screenshots/" .. host.ip .. ".." .. port.number .. ".png"
+        -- Screenshots will be called screenshot-namp-<IP>:<port>.png
 
-	-- Execute the shell command timeout 10 wkhtmltoimage <url> <filename>
-	local cmd = "timeout 10 wkhtmltoimage --height 768 -n " .. service_prefix .. "://" .. host.ip .. ":" .. port.number .. " " .. filename .. " 2>/dev/null >/dev/null"
+        local filename = "./ui_app/static/screenshots/" .. identifier .. ".." .. port.number .. ".png"
+
+        -- Execute the shell command timeout 10 wkhtmltoimage <url> <filename>
+        local cmd = "timeout 10 wkhtmltoimage --height 768 -n " .. service_prefix .. "://" .. identifier .. ":" .. port.number .. " " .. filename .. " 2>/tmp/123 >/tmp/1234"
 	
 	local ret = os.execute(cmd)
 
